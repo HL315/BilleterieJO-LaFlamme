@@ -1,0 +1,116 @@
+.home {
+    text-align: center;
+  }
+  
+
+  .hero {
+    background-image: url('../assets/images/Paris.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 5rem 0;
+    height: 50vh; 
+    width: 100%;
+  }
+  
+  @media (max-width: 1200px) {
+    .hero {
+      height: 40vh; 
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .hero {
+      height: 30vh;
+    }
+  }
+  
+  .hero-content {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .events {
+    padding: 50px 20px;
+  }
+  
+  .events h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .event-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 50px; /* Augmentez l'espace entre les cartes */
+  }
+  
+  .event-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 250px; /* Réduisez la largeur des cartes */
+    height: 400px; /* Réduisez la hauteur des cartes */
+    max-width: 100%;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+  
+  .event-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .event-card img {
+    width: 100%;
+    height: 25%; /* L'image prend la moitié de la hauteur de la carte */
+    border-radius: 8px 8px 0 0;
+    object-fit: cover; /* Assure que l'image couvre bien l'espace sans être déformée */
+  }
+  
+  .event-card h3 {
+    font-size: 1.5rem;
+    margin: 15px 0 10px;
+  }
+  
+  .event-card p {
+    font-size: 1rem;
+    color: #666;
+  }
+  
+  .tickets {
+    padding: 50px 20px;
+  }
+  
+  .tickets h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .tickets p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+  }
+  
+  .tickets button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .tickets button:hover {
+    background-color: #0056b3;
+  }
