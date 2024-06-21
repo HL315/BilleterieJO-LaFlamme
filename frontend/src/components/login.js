@@ -1,41 +1,45 @@
 import React, { useState } from 'react';
-import { login } from '../api';
-import { Link, useNavigate } from 'react-router-dom';
+import axiosInstance from '../api/axiosConfig';
 
 const Login = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const navigate = useNavigate();
+  const [credentials, setCredentials] = useState({ username: '', password: '' });
 
-    const handleLogin = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await login(email, password);
-            // Sauvegarder le token JWT dans le localStorage ou un autre endroit
-            localStorage.setItem('token', response.data.token);
-            navigate('/');
-        } catch (error) {
-            console.error('Login failed', error);
-        }
-    };
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setCredentials({ ...credentials, [name]: value });
+  };
 
-    return (
-        <div>
-            <h2>Login</h2>
-            <form onSubmit={handleLogin}>
-                <div>
-                    <label>Email:</label>
-                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-                </div>
-                <div>
-                    <label>Password:</label>
-                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-                </div>
-                <button type="submit">Login</button>
-            </form>
-            <p>Don't have an account? <Link to="/signup">Sign up</Link></p>
-        </div>
-    );
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axiosInstance.post('/auth/login', credentials);
+      const token = response.data.token;
+      localStorage.setItem('authToken', token); // Stocker le token dans localStorage
+      // Rediriger ou mettre à jour l'état de l'application après la connexion
+    } catch (error) {
+      console.error('Login failed', error);
+    }
+  };
+
+  return (
+    <form onSubmit={handleLogin}>
+      <input
+        type="text"
+        name="username"
+        value={credentials.username}
+        onChange={handleInputChange}
+        placeholder="Username"
+      />
+      <input
+        type="password"
+        name="password"
+        value={credentials.password}
+        onChange={handleInputChange}
+        placeholder="Password"
+      />
+      <button type="submit">Login</button>
+    </form>
+  );
 };
 
 export default Login;

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Container, Typography, TextField, Button } from '@mui/material';
-import axiosInstance from '../api/axiosConfig';
 import '../styles/eventDetails.css';
 
 const EventDetails = () => {
@@ -10,21 +9,18 @@ const EventDetails = () => {
   const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
-    const fetchEventDetails = async () => {
-      try {
-        const response = await axiosInstance.get(`/events/${eventId}`);
-        setEvent(response.data);
-      } catch (error) {
-        console.error('Error fetching event details', error);
-      }
+    const hardcodedEvent = {
+      id: eventId,
+      name: 'Basketball Match 1',
+      description: 'An exciting basketball match between two top teams.',
+      availableTickets: 50
     };
-
-    fetchEventDetails();
+    setEvent(hardcodedEvent);
   }, [eventId]);
 
   const handlePurchase = async () => {
     try {
-      const response = await axiosInstance.post('/tickets/purchase', { eventId, quantity });
+      // Simulate ticket purchase
       alert('Ticket purchased successfully');
     } catch (error) {
       console.error('Error purchasing ticket', error);

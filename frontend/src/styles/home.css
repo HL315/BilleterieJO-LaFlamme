@@ -28,6 +28,7 @@
   .hero-content {
     max-width: 600px;
     margin: 0 auto;
+    color: #000000;
   }
   
   body {
@@ -44,6 +45,7 @@
   .events h2 {
     font-size: 2rem;
     margin-bottom: 20px;
+    color: #F9B087;
   }
   
   .event-cards {
@@ -94,6 +96,7 @@
   .tickets h2 {
     font-size: 2rem;
     margin-bottom: 20px;
+    color: #F9B087;
   }
   
   .tickets p {
@@ -102,8 +105,8 @@
   }
   
   .tickets button {
-    background-color: #007bff;
-    color: white;
+    background-color: #333333;
+    color: #F9B087;
     border: none;
     padding: 10px 20px;
     font-size: 1rem;
@@ -112,5 +115,5 @@
   }
   
   .tickets button:hover {
-    background-color: #0056b3;
+    background-color: #000000;
   }

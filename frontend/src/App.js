@@ -10,6 +10,8 @@ import TicketPurchase from './components/ticketPurchase';
 import OrderHistory from './components/orderHistory';
 import Login from './components/login';
 import Signup from './components/signup';
+import Footer from './components/footer';
+
 
 function App() {
   return (
@@ -27,6 +29,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
         </Routes>
+        <Footer />
       </div>
     </Router>
   );

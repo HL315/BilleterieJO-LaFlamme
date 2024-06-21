@@ -1,5 +1,3 @@
-// src/main/java/fr/efrei/BilleterieJO/models/Event.java
-
 package fr.efrei.BilleterieJO.models;
 
 import javax.persistence.*;
