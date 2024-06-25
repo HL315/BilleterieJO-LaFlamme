@@ -1,7 +1,6 @@
 package fr.efrei.BilleterieJO.security;
 
-import fr.efrei.BilleterieJO.security.UserDetailsServiceImpl;
-import fr.efrei.BilleterieJO.security.JwtRequestFilter;
+import fr.efrei.BilleterieJO.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -46,18 +45,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
-                .authorizeRequests().antMatchers("/auth/authenticate", "/auth/register").permitAll()
+                .authorizeRequests().antMatchers("/auth/login", "/auth/signup", "/api/events/**", "/api/sports/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .exceptionHandling().and().sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
     @Bean
     public HttpFirewall httpFirewall() {
         StrictHttpFirewall firewall = new StrictHttpFirewall();
-        firewall.setAllowSemicolon(false); 
+        firewall.setAllowSemicolon(true); // Allowing semicolons, adjust as needed
+        firewall.setAllowUrlEncodedSlash(true); // Allowing encoded slashes, adjust as needed
+        // Configure other allowed characters as needed
         return firewall;
     }
 }

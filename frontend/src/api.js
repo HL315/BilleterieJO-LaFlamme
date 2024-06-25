@@ -1,11 +1,19 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:9090/api'; // Ajustez cette URL en fonction de votre backend
+const API_URL = 'http://localhost:9090/auth'; 
 
-export const login = (email, password) => {
-    return axios.post(`${API_URL}/login`, { email, password });
+export const login = (username, password) => {
+    return axios.post(`${API_URL}/login`, { username, password }, {
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    });
 };
 
-export const signup = (email, password) => {
-    return axios.post(`${API_URL}/signup`, { email, password });
+export const signup = (username, password) => {
+    return axios.post(`${API_URL}/signup`, { username, password }, {
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    });
 };

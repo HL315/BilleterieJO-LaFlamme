@@ -1,10 +1,10 @@
 package fr.efrei.BilleterieJO.controllers;
 
+import fr.efrei.BilleterieJO.models.*;
 import fr.efrei.BilleterieJO.security.UserDetailsServiceImpl;
-import fr.efrei.BilleterieJO.models.AuthenticationRequest;
-import fr.efrei.BilleterieJO.models.AuthenticationResponse;
-import fr.efrei.BilleterieJO.security.JwtTokenUtil;
+import fr.efrei.BilleterieJO.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -12,15 +12,19 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
+
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/auth")
 public class AuthController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private JwtTokenUtil jwtTokenUtil;
+    private JwtUtil jwtUtil;
 
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
@@ -32,12 +36,31 @@ public class AuthController {
                     new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword())
             );
         } catch (AuthenticationException e) {
-            return ResponseEntity.badRequest().body("Invalid username or password");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Incorrect username or password");
         }
 
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
-        final String jwt = jwtTokenUtil.generateToken(userDetails);
+        final String jwt = jwtUtil.generateToken(userDetails);
 
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
+    }
+
+    @PostMapping("/signup")
+    public ResponseEntity<?> registerUser(@RequestBody User user) {
+        if (userDetailsService.userExists(user.getUsername())) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Username is already taken");
+        }
+
+        // Set the default role to 'USER' (assuming role ID 1 corresponds to 'USER')
+        Role defaultRole = new Role();
+        defaultRole.setId(1L);
+        defaultRole.setName("USER");
+        Set<Role> roles = new HashSet<>();
+        roles.add(defaultRole);
+        user.setRoles(roles);
+
+        // Save the user
+        userDetailsService.saveUser(user);
+        return ResponseEntity.status(HttpStatus.CREATED).body("User registered successfully");
     }
 }

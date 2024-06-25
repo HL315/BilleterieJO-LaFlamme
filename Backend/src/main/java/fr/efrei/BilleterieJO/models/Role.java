@@ -1,26 +1,29 @@
 package fr.efrei.BilleterieJO.models;
 
-import org.springframework.security.core.GrantedAuthority;
-
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
-public class Role implements GrantedAuthority {
-
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
 
-    @ManyToMany(mappedBy = "roles")
-    private Set<User> users;
+    // Getters and setters
+    public Long getId() {
+        return id;
+    }
 
-    @Override
-    public String getAuthority() {
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
         return name;
     }
 
-    // getters and setters
+    public void setName(String name) {
+        this.name = name;
+    }
 }

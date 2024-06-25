@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SportService {
@@ -13,10 +14,20 @@ public class SportService {
     private SportRepository sportRepository;
 
     public List<Sport> getAllSports() {
-        return sportRepository.findAll();
+        List<Sport> sports = sportRepository.findAll();
+        sports.forEach(sport -> {
+            System.out.println("Sport: " + sport.getName());
+            sport.getEvents().forEach(event -> System.out.println("Event: " + event.getName()));
+        });
+        return sports;
     }
 
+
     public Sport getSportById(Long id) {
-        return sportRepository.findById(id).orElseThrow(() -> new RuntimeException("Sport not found"));
+        Optional<Sport> sport = sportRepository.findById(id);
+        if (sport.isPresent()) {
+            System.out.println("Fetched sport from DB: " + sport.get()); // Log les données
+        }
+        return sport.orElseThrow(() -> new RuntimeException("Sport not found"));
     }
 }

@@ -1,5 +1,6 @@
 package fr.efrei.BilleterieJO.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import javax.persistence.*;
 
 @Entity
@@ -7,16 +8,15 @@ public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
     private String description;
     private int availableTickets;
 
     @ManyToOne
-    @JoinColumn(name = "sport_id", nullable = false)
+    @JoinColumn(name = "sport_id")
+    @JsonBackReference
     private Sport sport;
 
-    // Getters and setters
     public Long getId() {
         return id;
     }

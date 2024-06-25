@@ -12,6 +12,10 @@ public class User {
 
     private String username;
     private String password;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String address;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -19,6 +23,16 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
+
+    // Getters and setters
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getUsername() {
         return username;
@@ -34,6 +48,38 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public Set<Role> getRoles() {

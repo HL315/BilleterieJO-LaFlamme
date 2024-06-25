@@ -1,18 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
+import axiosInstance from '../api/axiosConfig';
 import '../styles/sportsList.css';
 
 const SportsList = () => {
   const [sports, setSports] = useState([]);
 
   useEffect(() => {
-    const hardcodedSports = [
-      { id: 1, name: 'Basketball', description: 'A team sport where two teams, usually of five players each, opposing one another on a rectangular court.', image: '/images/basketball.jpg' },
-      { id: 2, name: 'Swimming', description: 'An individual or team racing sport that requires the use of one’s entire body to move through water.', image: '/images/swimming.jpg' },
-      // Add more sports as needed
-    ];
-    setSports(hardcodedSports);
+    const fetchSports = async () => {
+      try {
+        const response = await axiosInstance.get('/api/sports');
+        console.log('Fetched sports:', response.data); // Log les données
+        if (Array.isArray(response.data)) {
+          setSports(response.data);
+        } else {
+          console.error('Data is not an array:', response.data);
+        }
+      } catch (error) {
+        console.error('Error fetching sports', error);
+      }
+    };
+
+    fetchSports();
   }, []);
 
   return (

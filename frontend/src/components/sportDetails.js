@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Container, Typography, Button } from '@mui/material';
+import axiosInstance from '../api/axiosConfig'; // Make sure you have axiosConfig set up
 import '../styles/sportDetails.css';
 
 const SportDetails = () => {
@@ -8,18 +9,16 @@ const SportDetails = () => {
   const [sport, setSport] = useState(null);
 
   useEffect(() => {
-    const hardcodedSport = {
-      id: sportId,
-      name: 'Basketball',
-      description: 'A team sport where two teams, usually of five players each, opposing one another on a rectangular court.',
-      image: '/images/basketball.jpg',
-      events: [
-        { id: 1, name: 'Basketball Match 1' },
-        { id: 2, name: 'Basketball Match 2' },
-        // Add more events as needed
-      ]
+    const fetchSport = async () => {
+      try {
+        const response = await axiosInstance.get(`/api/sports/${sportId}`);
+        setSport(response.data);
+      } catch (error) {
+        console.error('Error fetching sport', error);
+      }
     };
-    setSport(hardcodedSport);
+
+    fetchSport();
   }, [sportId]);
 
   if (!sport) {
@@ -40,7 +39,7 @@ const SportDetails = () => {
       </Typography>
       <div className="events-list">
         {sport.events.map((event) => (
-          <div key={event.id} className="event-card">
+          <div key={event.id} className="event-card">  {/* Adding key here */}
             <Typography variant="h6">{event.name}</Typography>
             <Link to={`/events/${event.id}`}>
               <Button variant="contained" color="primary">
