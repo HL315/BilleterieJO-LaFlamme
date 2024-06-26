@@ -1,13 +1,12 @@
-/* General form container */
 .form-container {
     padding: 2rem;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-top: 3rem; /* Space between the form and the header */
-    margin-bottom: 3rem; /* Increased space between the form and the footer */
+    margin-top: 3rem; 
+    margin-bottom: 3rem; 
   }
   
-  /* Form input fields */
+
   .MuiTextField-root {
     margin-bottom: 1rem;
   }
@@ -41,7 +40,7 @@
     text-decoration: underline;
   }
   
-  /* Form input fields */
+
   input[type="text"],
   input[type="password"],
   input[type="email"] {
@@ -50,10 +49,9 @@
     margin: 8px 0;
     box-sizing: border-box;
     border-radius: 4px;
-    background-color: #fff; /* Ensure the background is white */
+    background-color: #fff; 
   }
   
-  /* Remove outline and add box-shadow on focus */
   input[type="text"]:focus,
   input[type="password"]:focus,
   input[type="email"]:focus {
@@ -61,7 +59,6 @@
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   }
   
-  /* Form submit button */
   button[type="submit"] {
     background-color: #333333;
     color: white;

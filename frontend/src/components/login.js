@@ -17,9 +17,10 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axiosInstance.post('/auth/login', credentials);
-      const token = response.data.token;
+      const token = response.data.jwt;
+      console.log('Token:', token); // Debugging line to check the token
       localStorage.setItem('authToken', token);
-      // Redirect or update the application state after login
+      navigate('/account');
     } catch (error) {
       console.error('Login failed', error);
     }

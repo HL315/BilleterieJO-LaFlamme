@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { Container, Typography, List, ListItem, ListItemText } from '@mui/material';
-import axios from 'axios';
+// OrderHistory.js
+import React, { useState, useEffect } from 'react';
+import axiosInstance from '../api/axiosConfig';
+import { Container, Typography } from '@mui/material';
 
 const OrderHistory = () => {
   const [orders, setOrders] = useState([]);
@@ -8,7 +9,7 @@ const OrderHistory = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await axios.get('/api/orders');
+        const response = await axiosInstance.get('/api/orders');
         setOrders(response.data);
       } catch (error) {
         console.error('Error fetching order history', error);
@@ -23,16 +24,22 @@ const OrderHistory = () => {
       <Typography variant="h4" component="h1" gutterBottom>
         Order History
       </Typography>
-      <List>
-        {orders.map((order) => (
-          <ListItem key={order.id}>
-            <ListItemText
-              primary={`Order ID: ${order.id}`}
-              secondary={`Date: ${order.date} - Amount: ${order.montant}`}
-            />
-          </ListItem>
-        ))}
-      </List>
+      {orders.length > 0 ? (
+        orders.map((order) => (
+          <div key={order.id}>
+            <Typography variant="h6">
+              Event: {order.event.name}
+            </Typography>
+            <Typography variant="body1">
+              Quantity: {order.quantity}
+            </Typography>
+          </div>
+        ))
+      ) : (
+        <Typography variant="body1">
+          No orders found.
+        </Typography>
+      )}
     </Container>
   );
 };

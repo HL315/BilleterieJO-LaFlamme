@@ -25,16 +25,26 @@ const SportsList = () => {
     fetchSports();
   }, []);
 
+  const getImagePath = (imageName) => {
+    try {
+      const images = require.context('../assets/images', false, /\.(png|jpe?g|svg)$/);
+      return images(`./${imageName}`);
+    } catch (error) {
+      console.error('Error loading image:', error);
+      return null;
+    }
+  };
+
   return (
-    <Container>
-      <Typography variant="h4" component="h1" gutterBottom>
+    <Container className="sports-container">
+      <Typography variant="h4" component="h1" gutterBottom className="sports-title">
         Available Sports
       </Typography>
       <div className="sports-cards">
         {sports.map((sport) => (
           <div key={sport.id} className="sport-card">
             <Link to={`/sports/${sport.id}`}>
-              <img src={sport.image} alt={sport.name} />
+              <img src={getImagePath(sport.image)} alt={sport.name} />
               <h3>{sport.name}</h3>
               <p>{sport.description}</p>
             </Link>

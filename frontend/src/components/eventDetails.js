@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 import { Container, Typography, TextField, Button } from '@mui/material';
 import axiosInstance from '../api/axiosConfig';
-import '../styles/eventDetails.css';
+import { useParams } from 'react-router-dom';
+import '../styles/eventDetails.css'; // Import CSS file
 
 const EventDetails = () => {
   const { eventId } = useParams();
@@ -22,34 +22,36 @@ const EventDetails = () => {
     fetchEvent();
   }, [eventId]);
 
-  const handlePurchase = async () => {
+  const handleAddToBasket = async () => {
     try {
-      const purchaseRequest = {
+      const basketItemDTO = {
         eventId: event.id,
         quantity: quantity,
       };
-      await axiosInstance.post('/api/events/purchase', purchaseRequest);
-      alert('Ticket purchased successfully');
+      await axiosInstance.post('/api/orders/add-to-basket', basketItemDTO);
+      alert('Item added to basket successfully');
     } catch (error) {
-      console.error('Error purchasing ticket', error);
+      console.error('Error adding item to basket', error);
     }
   };
 
   if (!event) {
-    return <p>Loading...</p>;
+    return <div className="loading-container"><Typography variant="h6">Loading...</Typography></div>;
   }
 
   return (
-    <Container>
+    <Container className="event-details-container">
       <Typography variant="h4" component="h1" gutterBottom>
         {event.name}
       </Typography>
-      <Typography variant="body1" gutterBottom>
-        {event.description}
-      </Typography>
-      <Typography variant="h6" component="h2" gutterBottom>
-        Available Tickets: {event.availableTickets}
-      </Typography>
+      <div className="event-details-info">
+        <Typography variant="body1" gutterBottom>
+          {event.description}
+        </Typography>
+        <Typography variant="h6" component="h2" gutterBottom>
+          Available Tickets: {event.availableTickets}
+        </Typography>
+      </div>
       <TextField
         label="Quantity"
         type="number"
@@ -57,10 +59,13 @@ const EventDetails = () => {
         onChange={(e) => setQuantity(e.target.value)}
         fullWidth
         margin="normal"
+        className="event-details-quantity"
       />
-      <Button variant="contained" color="primary" onClick={handlePurchase}>
-        Purchase
-      </Button>
+      <div className="event-details-button">
+        <Button className="event-details-button">
+          Add to Basket
+        </Button>
+      </div>
     </Container>
   );
 };

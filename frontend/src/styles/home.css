@@ -15,13 +15,13 @@
   
   @media (max-width: 1200px) {
     .hero {
-      height: 40vh; 
+      height: 4vh; 
     }
   }
   
   @media (max-width: 768px) {
     .hero {
-      height: 30vh;
+      height: 3vh;
     }
   }
   
@@ -52,7 +52,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 50px; /* Augmentez l'espace entre les cartes */
+    gap: 50px;
   }
   
   .event-card {
@@ -60,8 +60,8 @@
     border: 1px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 250px; /* Réduisez la largeur des cartes */
-    height: 400px; /* Réduisez la hauteur des cartes */
+    width: 250px;
+    height: 400px;
     max-width: 100%;
     padding: 20px;
     text-align: center;
@@ -74,9 +74,9 @@
   
   .event-card img {
     width: 100%;
-    height: 25%; /* L'image prend la moitié de la hauteur de la carte */
+    height: 25%;
     border-radius: 8px 8px 0 0;
-    object-fit: cover; /* Assure que l'image couvre bien l'espace sans être déformée */
+    object-fit: cover;
   }
   
   .event-card h3 {

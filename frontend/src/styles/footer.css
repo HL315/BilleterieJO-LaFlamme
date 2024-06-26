@@ -4,32 +4,32 @@
     border-top: 1px solid #ccc;
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Change align-items to flex-start */
+    align-items: flex-start;
     text-align: left;
 }
 
 .footer-content {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start; /* Change align-items to flex-start */
+    align-items: flex-start;
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
     flex-wrap: wrap;
-    gap: 20px; /* Adjust gap to maintain some spacing */
+    gap: 20px;
 }
 
 .footer-brand {
     color: #F9B087;
     margin-bottom: 10px;
     font-size: 24px;
-    margin-top: 75px; /* Ajout du margin-top pour baisser "LaFlamme" */
+    margin-top: 75px;
 }
 
 .social-icons {
     display: flex;
-    justify-content: flex-start; /* Change justify-content to flex-start */
-    gap: 10px; /* Adjust gap for spacing between icons */
+    justify-content: flex-start;
+    gap: 10px;
 }
 
 .social-icons a {
