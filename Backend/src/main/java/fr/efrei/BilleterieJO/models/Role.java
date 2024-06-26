@@ -1,6 +1,7 @@
 package fr.efrei.BilleterieJO.models;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Role {
@@ -10,7 +11,9 @@ public class Role {
 
     private String name;
 
-    // Getters and setters
+    @ManyToMany(mappedBy = "roles")
+    private Set<User> users;
+
     public Long getId() {
         return id;
     }

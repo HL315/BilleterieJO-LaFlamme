@@ -14,5 +14,4 @@ public class TicketService {
         return ticketRepository.save(ticket);
     }
 
-    // Autres méthodes de gestion des billets...
 }

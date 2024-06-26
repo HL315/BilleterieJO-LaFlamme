@@ -17,6 +17,4 @@ public class TicketController {
     public ResponseEntity<Ticket> createTicket(@RequestBody Ticket ticket) {
         return ResponseEntity.ok(ticketService.saveTicket(ticket));
     }
-
-    // Autres endpoints...
 }
