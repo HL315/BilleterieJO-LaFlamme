@@ -3,21 +3,22 @@ package fr.efrei.BilleterieJO.models;
 import javax.persistence.*;
 
 @Entity
-public class Order {
+public class BasketItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "basket_id")
+    private Basket basket;
 
     @ManyToOne
     @JoinColumn(name = "event_id")
     private Event event;
 
     private int quantity;
+
 
     public Long getId() {
         return id;
@@ -27,12 +28,12 @@ public class Order {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public Basket getBasket() {
+        return basket;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setBasket(Basket basket) {
+        this.basket = basket;
     }
 
     public Event getEvent() {

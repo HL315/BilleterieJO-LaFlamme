@@ -24,8 +24,13 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
-    // Getters and setters
+    public User() {}
 
+    public User(Long id) {
+        this.id = id;
+    }
+
+    // Getters and setters
     public Long getId() {
         return id;
     }

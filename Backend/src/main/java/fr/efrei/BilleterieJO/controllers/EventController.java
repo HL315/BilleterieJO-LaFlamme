@@ -23,14 +23,14 @@ public class EventController {
         return eventService.getAllEvents();
     }
 
-    @CrossOrigin(origins = "http://localhost:3000") // Ajoutez cette annotation si nécessaire
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/{id}")
     public ResponseEntity<Event> getEventById(@PathVariable Long id) {
         Optional<Event> event = eventService.getEventById(id);
         return event.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @CrossOrigin(origins = "http://localhost:3000") // Ajoutez cette annotation si nécessaire
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/purchase")
     public ResponseEntity<?> purchaseTicket(@RequestBody PurchaseRequest request) {
         try {

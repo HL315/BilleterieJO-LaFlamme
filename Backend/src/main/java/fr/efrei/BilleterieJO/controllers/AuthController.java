@@ -12,8 +12,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 @RestController
@@ -51,7 +51,6 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Username is already taken");
         }
 
-        // Set the default role to 'USER' (assuming role ID 1 corresponds to 'USER')
         Role defaultRole = new Role();
         defaultRole.setId(1L);
         defaultRole.setName("USER");
@@ -59,8 +58,14 @@ public class AuthController {
         roles.add(defaultRole);
         user.setRoles(roles);
 
-        // Save the user
         userDetailsService.saveUser(user);
         return ResponseEntity.status(HttpStatus.CREATED).body("User registered successfully");
     }
+
+    @GetMapping("/account")
+    public ResponseEntity<?> getAccount(Principal principal) {
+        User user = userDetailsService.findByUsername(principal.getName());
+        return ResponseEntity.ok(user);
+    }
+
 }

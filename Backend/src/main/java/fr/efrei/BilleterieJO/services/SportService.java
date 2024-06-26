@@ -26,7 +26,7 @@ public class SportService {
     public Sport getSportById(Long id) {
         Optional<Sport> sport = sportRepository.findById(id);
         if (sport.isPresent()) {
-            System.out.println("Fetched sport from DB: " + sport.get()); // Log les données
+            System.out.println("Fetched sport from DB: " + sport.get());
         }
         return sport.orElseThrow(() -> new RuntimeException("Sport not found"));
     }
